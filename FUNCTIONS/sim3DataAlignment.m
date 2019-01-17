@@ -1,4 +1,4 @@
-%% align data by sm3 method
+%% align data by sim3 method
 %   Author:         Xiaochen Qiu from Beihang Univ.
 %   Reference:      "Least-Squares Estimation of Transformation Parameters 
 %                   between Two Point Patterns"
@@ -11,7 +11,7 @@
 % @R: rotation
 % @t: transition
 % @s: scale
-function [R, t, s] = Sm3DataAlignment (X, Y)
+function [R, t, s] = sim3DataAlignment (X, Y)
 % Assertion
 if ( size(X,1)~=3 || size(Y,1)~=3 )
     error('TERMINATED BY FUNC Sm3DataAlignment: INPUT IS NOT 3D VECTOR');
