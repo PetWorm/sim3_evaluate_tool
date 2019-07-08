@@ -19,18 +19,16 @@ take_off_stamp = 1413394886.455760384;  % timestamp standard in est.txt
 gt(:,1) = gt(:,1)*1e-9;
 gt(:,1) = gt(:,1)-take_off_stamp;
 
-%% extract timestamp and 3d position from 'gt' and 'est', these are all we need for alignment
+%% alignment
 time_gt = gt(:,1);
 P_gt = gt(:,2:4)';
 time_es = est(:,1);
 P_es = est(:,9:11)';
-
-%% alignment
 [Ids_es, Ids_gt] = findIds (time_es, time_gt, 0.001);
-[R_es, t_es, s_es] = sim3DataAlignment (P_es(:,Ids_es), P_gt(:,Ids_gt));
+[R_es, t_es, s_es] = sim3DataAlignment (P_es(:,Ids_es), P_gt(:,Ids_gt), 'vio');
 
-%% do not miss '/s_es' to maintain the estimated scale
-P_es_aligned = R_es*P_es + repmat(t_es,1,size(P_es,2))/s_es;
+%% align the estimated trajectory
+P_es_aligned = R_es*P_es + repmat(t_es,1,size(P_es,2));
 
 %% draw trajectory
 time_matched = time_es(Ids_es);
