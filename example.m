@@ -28,7 +28,7 @@ P_es = est(:,9:11)';
 [R_es, t_es, s_es] = sim3DataAlignment (P_es(:,Ids_es), P_gt(:,Ids_gt), 'vio');
 
 %% align the estimated trajectory
-P_es_aligned = R_es*P_es + repmat(t_es,1,size(P_es,2));
+P_es_aligned = s_es*R_es*P_es + repmat(t_es,1,size(P_es,2));
 
 %% draw trajectory
 time_matched = time_es(Ids_es);
